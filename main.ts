@@ -9,7 +9,6 @@ interface Joke {
 
 function newJoke() {
     getJoke();
-    showJoke();
 }
 
 async function getJoke(): Promise<Joke> { //para coger los datos de una API
@@ -24,6 +23,7 @@ async function getJoke(): Promise<Joke> { //para coger los datos de una API
     }
 
     responseApi = await response.json()
+    showJoke(); //llamada a la funcion que muestra el chiste
     return responseApi;
 }
 
@@ -33,9 +33,8 @@ function showJoke() {
         const showJokeElement = document.getElementById("showJoke");
 
         if (showJokeElement) {
-            console.log(responseApi.joke);
+            showJokeElement.innerHTML = responseApi.joke;
         }
     }
-
 }
 

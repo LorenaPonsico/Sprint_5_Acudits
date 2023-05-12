@@ -38,7 +38,6 @@ var API_URL = "https://icanhazdadjoke.com/";
 var responseApi;
 function newJoke() {
     getJoke();
-    showJoke();
 }
 function getJoke() {
     return __awaiter(this, void 0, void 0, function () {
@@ -58,6 +57,7 @@ function getJoke() {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     responseApi = _a.sent();
+                    showJoke(); //llamada a la funcion que muestra el chiste
                     return [2 /*return*/, responseApi];
             }
         });
@@ -67,7 +67,7 @@ function showJoke() {
     if (responseApi) {
         var showJokeElement = document.getElementById("showJoke");
         if (showJokeElement) {
-            console.log(responseApi.joke);
+            showJokeElement.innerHTML = responseApi.joke;
         }
     }
 }
