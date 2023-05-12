@@ -1,0 +1,10 @@
+.card {
+    width: 50%;
+
+}
+
+.image-one {
+    background-image: url(images/jade-masri-74tlEYKgrBE-unsplash.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
