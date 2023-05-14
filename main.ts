@@ -38,3 +38,28 @@ function showJoke() {
     }
 }
 
+let reportJokes: Score[] = []
+interface Score  {
+    joke: string,
+    score: number,
+    date: string,
+}
+
+let objectJoke = { joke: "", score: 0, date: "" };
+
+function scoreJoke(id: number) {
+    const scoreJoke = id;
+    const date = new Date();
+    const dateToString = date.toISOString();
+    const existJoke = reportJokes.find((x) => x.joke === responseApi.joke);
+    if (!existJoke) {
+      objectJoke = { joke: responseApi.joke, score: scoreJoke, date: dateToString };
+      reportJokes.push(objectJoke);
+    }
+    if (existJoke) {
+      objectJoke.score = scoreJoke;
+    }
+    // console.log(objectJoke);
+    console.log(reportJokes);
+  }
+

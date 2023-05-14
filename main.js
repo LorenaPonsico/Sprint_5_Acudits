@@ -71,3 +71,20 @@ function showJoke() {
         }
     }
 }
+var reportJokes = [];
+var objectJoke = { joke: "", score: 0, date: "" };
+function scoreJoke(id) {
+    var scoreJoke = id;
+    var date = new Date();
+    var dateToString = date.toISOString();
+    var existJoke = reportJokes.find(function (x) { return x.joke === responseApi.joke; });
+    if (!existJoke) {
+        objectJoke = { joke: responseApi.joke, score: scoreJoke, date: dateToString };
+        reportJokes.push(objectJoke);
+    }
+    if (existJoke) {
+        objectJoke.score = scoreJoke;
+    }
+    // console.log(objectJoke);
+    console.log(reportJokes);
+}
