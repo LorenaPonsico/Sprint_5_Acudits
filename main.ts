@@ -1,4 +1,5 @@
 const API_URL = "https://icanhazdadjoke.com/"
+const API_URL2 = "https://api.chucknorris.io/jokes/random";
 let responseApi: Joke;
 
 interface Joke {
@@ -26,6 +27,8 @@ async function getJoke(): Promise<Joke> { //para coger los datos de una API
     showJoke(); //llamada a la funcion que muestra el chiste
     return responseApi;
 }
+
+
 
 function showJoke() {
 
