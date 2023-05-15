@@ -39,7 +39,7 @@ function showJoke() {
 }
 
 let reportJokes: Score[] = []
-interface Score  {
+interface Score {
     joke: string,
     score: number,
     date: string,
@@ -53,13 +53,35 @@ function scoreJoke(id: number) {
     const dateToString = date.toISOString();
     const existJoke = reportJokes.find((x) => x.joke === responseApi.joke);
     if (!existJoke) {
-      objectJoke = { joke: responseApi.joke, score: scoreJoke, date: dateToString };
-      reportJokes.push(objectJoke);
+        objectJoke = { joke: responseApi.joke, score: scoreJoke, date: dateToString };
+        reportJokes.push(objectJoke);
     }
     if (existJoke) {
-      objectJoke.score = scoreJoke;
+        objectJoke.score = scoreJoke;
     }
     // console.log(objectJoke);
     console.log(reportJokes);
-  }
+}
 
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      const latitude: number = position.coords.latitude;
+      const longitude: number = position.coords.longitude;
+  
+      // Haciendo una solicitud a OpenWeatherMap API para obtener el tiempo
+      fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=665f830363c93f4634ee3058d048bc8f
+        `)
+        .then((response) => response.json())
+        .then((data) => {
+          const weather = data.weather;
+          const weatherDescription = weather[0].description;
+          const temperature = Math.round(data.main.temp);
+          const celsiusTemperature = (temperature - 273.15).toFixed(0);
+        //   console.log(data);
+        //   console.log(weatherDescription);
+        //   console.log(temperature);
+          
+          document.getElementById("showWeather")!.innerHTML = `Today: ${weatherDescription} and ${celsiusTemperature}ºC`;
+        });
+    });
+  }

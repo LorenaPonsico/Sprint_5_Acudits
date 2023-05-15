@@ -8,3 +8,25 @@
     background-size: cover;
     background-attachment: fixed;
 }
+
+.weather {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 20px;
+    margin-right: 40px;
+}
+
+#showWeather {
+    float: left;
+    margin-left: 5px;
+    color: green;
+    font-size:medium;
+}
+  
+
+/* .scoreButtons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
