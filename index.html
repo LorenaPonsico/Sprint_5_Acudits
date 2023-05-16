@@ -11,34 +11,36 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 
-<body class="vh-100 d-flex align-items-center image-one">
-    <div class="container d-flex justify-content-center align-items-center">
+<body class="d-flex align-items-center">
+
+    <div class="container justify-content-center align-items-center">
+
         <div id="weather" class="weather">
+            <img id="iconWeather" src="" alt=""></img>
             <span id="showWeather"></span>
         </div>
 
-        <div class="container">
-            <p class="card-title fs-2 fw-bolder">Ready to laugh?</p>
-            <br>
+        <h1 class="card-title fs-2 fw-bolder">Ready to laugh?</h1>
+        <br>
+        <div class="text-center font-monospace" id="showJoke"></div>
+        <br>
 
-            <div class="text-center" id="showJoke"></div>
-            <br>
-
-            <div class="scoreButtons notShow" id="scoreButtons">
-                <button class="btn btn-lg btn-outline-light buttonScore " id="button1" onclick="scoreJoke(1)">&#128577;</button>
-                <button class="btn btn-lg btn-outline-light buttonScore" id="button2" onclick="scoreJoke(2)">&#128512;</button>
-                <button class="btn btn-lg btn-outline-light buttonScore" id="button3" onclick="scoreJoke(3)">&#128514;</button>
-            </div>
-
-
-            <div>
-                <button class="btn btn-outline-success btn-sm button-Joke " onclick="newJoke()">Next Joke</button>
-            </div>
-
-
+        <div class="scoreButtons notShow" id="scoreButtons">
+            <button class="btn btn-lg btn-outline-light buttonScore " id="button1"
+                onclick="scoreJoke(1)">&#128577;</button>
+            <button class="btn btn-lg btn-outline-light buttonScore" id="button2"
+                onclick="scoreJoke(2)">&#128512;</button>
+            <button class="btn btn-lg btn-outline-light buttonScore" id="button3"
+                onclick="scoreJoke(3)">&#128514;</button>
         </div>
 
-        <script src="main.js"></script>
-</body>
+        <div>
+            <button class="btn btn-outline-success btn-sm button-Joke " onclick="newJoke()">Next Joke</button>
+        </div>
 
+    </div>
+    
+    <script src="main.js"></script>
+
+</body>
 </html>

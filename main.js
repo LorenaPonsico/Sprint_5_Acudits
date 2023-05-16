@@ -143,18 +143,17 @@ if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
-        // Haciendo una solicitud a OpenWeatherMap API para obtener el tiempo
+        //llamada a OpenWeatherMap API para obtener el tiempo
         fetch("http://api.openweathermap.org/data/2.5/weather?lat=".concat(latitude, "&lon=").concat(longitude, "&appid=665f830363c93f4634ee3058d048bc8f\n        "))
             .then(function (response) { return response.json(); })
             .then(function (data) {
             var weather = data.weather;
-            var weatherDescription = weather[0].description;
             var temperature = Math.round(data.main.temp);
             var celsiusTemperature = (temperature - 273.15).toFixed(0);
-            //   console.log(data);
-            //   console.log(weatherDescription);
-            //   console.log(temperature);
-            document.getElementById("showWeather").innerHTML = "Today: ".concat(weatherDescription, " and ").concat(celsiusTemperature, "\u00BAC");
+            var icon = (weather[0]).icon;
+            var iconWeather = document.getElementById('iconWeather');
+            iconWeather.src = "./svg/imagesWeather/".concat(icon, "@2x.png");
+            document.getElementById("showWeather").innerHTML = " ".concat(celsiusTemperature, "\u00BAC");
         });
     });
 }

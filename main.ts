@@ -58,6 +58,7 @@ async function getJokeChuckNorris(): Promise<JokeChuckNorris> { //para coger los
 function showJoke(responseApi1: Joke | null, responseApiChuckNorris: JokeChuckNorris | null) {
     const showJokeElement = document.getElementById("showJoke");
     const showButtonsScore = document.getElementById("scoreButtons");
+
     if (responseApi1) {
         if (showButtonsScore) {
             showButtonsScore?.classList.remove("notShow");
@@ -66,6 +67,7 @@ function showJoke(responseApi1: Joke | null, responseApiChuckNorris: JokeChuckNo
             showJokeElement.innerHTML = responseApi1.joke;
         }
     }
+
     if (responseApiChuckNorris) {
         if (showButtonsScore) {
             showButtonsScore?.classList.remove("notShow");
@@ -100,23 +102,19 @@ if (navigator.geolocation) {
         const latitude: number = position.coords.latitude;
         const longitude: number = position.coords.longitude;
 
-        // Haciendo una solicitud a OpenWeatherMap API para obtener el tiempo
+        //llamada a OpenWeatherMap API para obtener el tiempo
         fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=665f830363c93f4634ee3058d048bc8f
         `)
             .then((response) => response.json())
             .then((data) => {
                 const weather = data.weather;
-                const weatherDescription = weather[0].description;
                 const temperature = Math.round(data.main.temp);
                 const celsiusTemperature = (temperature - 273.15).toFixed(0);
-                //   console.log(data);
-                //   console.log(weatherDescription);
-                //   console.log(temperature);
+                const icon = (weather[0]).icon;
+                const iconWeather = <HTMLImageElement>document.getElementById('iconWeather')
+                iconWeather.src = `./svg/imagesWeather/${icon}@2x.png`
 
-                document.getElementById("showWeather")!.innerHTML = `Today: ${weatherDescription} and ${celsiusTemperature}ºC`;
+                document.getElementById("showWeather")!.innerHTML = ` ${celsiusTemperature}ºC`;
             });
     });
 }
-
-
-
