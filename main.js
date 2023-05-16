@@ -79,6 +79,9 @@ function getJoke() {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     responseApi1 = _a.sent();
+                    return [4 /*yield*/, responseApi1.joke];
+                case 3:
+                    results = _a.sent();
                     return [2 /*return*/, responseApi1];
             }
         });
@@ -98,40 +101,42 @@ function getJokeChuckNorris() {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     responseApiChuckNorris = _a.sent();
+                    return [4 /*yield*/, responseApiChuckNorris.value];
+                case 3:
+                    results = _a.sent();
                     return [2 /*return*/, responseApiChuckNorris];
             }
         });
     });
 }
 function showJoke(responseApi1, responseApiChuckNorris) {
+    var showJokeElement = document.getElementById("showJoke");
+    var showButtonsScore = document.getElementById("scoreButtons");
     if (responseApi1) {
-        var showJokeElement = document.getElementById("showJoke");
+        if (showButtonsScore) {
+            showButtonsScore === null || showButtonsScore === void 0 ? void 0 : showButtonsScore.classList.remove("notShow");
+        }
         if (showJokeElement) {
             showJokeElement.innerHTML = responseApi1.joke;
         }
     }
     if (responseApiChuckNorris) {
-        var showJokeElement = document.getElementById("showJoke");
+        if (showButtonsScore) {
+            showButtonsScore === null || showButtonsScore === void 0 ? void 0 : showButtonsScore.classList.remove("notShow");
+        }
         if (showJokeElement) {
             showJokeElement.innerHTML = responseApiChuckNorris.value;
         }
     }
 }
 var reportJokes = [];
-var objectJoke = { joke: "", score: 0, date: "" };
-function scoreJoke(id) {
-    var scoreJoke = id;
-    var date = new Date();
-    var dateToString = date.toISOString();
-    var existJoke = reportJokes.find(function (x) { return x.joke === responseApi1.joke; });
-    if (!existJoke) {
-        objectJoke = { joke: responseApi1.joke, score: scoreJoke, date: dateToString };
-        reportJokes.push(objectJoke);
-    }
-    if (existJoke) {
-        objectJoke.score = scoreJoke;
-    }
-    // console.log(objectJoke);
+var results;
+function scoreJoke(score) {
+    reportJokes.push({
+        joke: results,
+        score: score,
+        date: new Date().toISOString(),
+    });
     console.log(reportJokes);
 }
 if (navigator.geolocation) {

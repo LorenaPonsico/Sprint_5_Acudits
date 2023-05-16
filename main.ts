@@ -23,6 +23,7 @@ async function newJoke() {
 }
 
 function randomJokes(responseApi1: Joke, responseApiChuckNorris: JokeChuckNorris) {
+
     let number = Math.floor(Math.random() * 12);
     if (number <= 5) {
         showJoke(responseApi1, null);
@@ -38,31 +39,37 @@ async function getJoke(): Promise<Joke> { //para coger los datos de una API
     if (!response.ok) { // si la respuesta es fallida lanza un nuevo error con el estado
         throw new Error(`HTTP error! status: ${response.status}`);
     }
-    responseApi1 = await response.json()
+    responseApi1 = await response.json();
+    results = await responseApi1.joke;
     return responseApi1;
 }
 
-async function getJokeChuckNorris(): Promise<JokeChuckNorris> { //para coger los datos de una API
+async function getJokeChuckNorris(): Promise<JokeChuckNorris> { //para coger los datos de la segunda API
     const response = await fetch(API_URL2, header);  // fetch conecta con la API (pasamos la url y headers para que me traiga la info en formato json)
 
     if (!response.ok) { // si la respuesta es fallida lanza un nuevo error con el estado
         throw new Error(`HTTP error! status: ${response.status}`);
     }
-    responseApiChuckNorris = await response.json()
+    responseApiChuckNorris = await response.json();
+    results = await responseApiChuckNorris.value;
     return responseApiChuckNorris;
 }
 
 function showJoke(responseApi1: Joke | null, responseApiChuckNorris: JokeChuckNorris | null) {
+    const showJokeElement = document.getElementById("showJoke");
+    const showButtonsScore = document.getElementById("scoreButtons");
     if (responseApi1) {
-        const showJokeElement = document.getElementById("showJoke");
-
+        if (showButtonsScore) {
+            showButtonsScore?.classList.remove("notShow");
+        }
         if (showJokeElement) {
             showJokeElement.innerHTML = responseApi1.joke;
         }
     }
     if (responseApiChuckNorris) {
-        const showJokeElement = document.getElementById("showJoke");
-
+        if (showButtonsScore) {
+            showButtonsScore?.classList.remove("notShow");
+        }
         if (showJokeElement) {
             showJokeElement.innerHTML = responseApiChuckNorris.value;
         }
@@ -76,21 +83,16 @@ interface Score {
     date: string,
 }
 
-let objectJoke = { joke: "", score: 0, date: "" };
+let results: string;
 
-function scoreJoke(id: number) {
-    const scoreJoke = id;
-    const date = new Date();
-    const dateToString = date.toISOString();
-    const existJoke = reportJokes.find((x) => x.joke === responseApi1.joke);
-    if (!existJoke) {
-        objectJoke = { joke: responseApi1.joke, score: scoreJoke, date: dateToString };
-        reportJokes.push(objectJoke);
-    }
-    if (existJoke) {
-        objectJoke.score = scoreJoke;
-    }
-    // console.log(objectJoke);
+function scoreJoke(score: number) {
+
+    reportJokes.push({
+        joke: results,
+        score: score,
+        date: new Date().toISOString(),
+    });
+
     console.log(reportJokes);
 }
 

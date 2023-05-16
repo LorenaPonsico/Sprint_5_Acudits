@@ -53,6 +53,10 @@
     transform: translateY(4px);
   }
 
+  .notShow{
+    display: none;
+  }
+
 /* .card-background {
     background-image: url('./svg/blob.svg');
     background-repeat: no-repeat;
