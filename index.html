@@ -16,29 +16,29 @@
         <div id="weather" class="weather">
             <span id="showWeather"></span>
         </div>
-        <div class="text-center card ">
-            <div class=" card-body">
-                <p class="card-title fs-3 fw-boler">Ready to laugh?</p>
 
-                <div class="text-center fw-lighter" id="showJoke"></div>
-                <br>
+        <div class="container">
+            <p class="card-title fs-2 fw-bolder">Ready to laugh?</p>
+            <br>
 
-                <div class="scoreButtons notShow" id="scoreButtons" >
-                    <button class="buttonScore" id="button1" onclick="scoreJoke(1)">&#128577;</button>
-                    <button class="buttonScore" id="button2" onclick="scoreJoke(2)">&#128512;</button>
-                    <button class="buttonScore" id="button3" onclick="scoreJoke(3)">&#128514;</button>
-                </div>
+            <div class="text-center" id="showJoke"></div>
+            <br>
 
-               
-                <div>
-                    <button class="btn btn-outline-success btn-sm button-Joke " onclick="newJoke()">Next Joke</button>
-                </div>
-               
-
+            <div class="scoreButtons notShow" id="scoreButtons">
+                <button class="btn btn-lg btn-outline-light buttonScore " id="button1" onclick="scoreJoke(1)">&#128577;</button>
+                <button class="btn btn-lg btn-outline-light buttonScore" id="button2" onclick="scoreJoke(2)">&#128512;</button>
+                <button class="btn btn-lg btn-outline-light buttonScore" id="button3" onclick="scoreJoke(3)">&#128514;</button>
             </div>
+
+
+            <div>
+                <button class="btn btn-outline-success btn-sm button-Joke " onclick="newJoke()">Next Joke</button>
+            </div>
+
+
         </div>
-    </div>
-    <script src="main.js"></script>
+
+        <script src="main.js"></script>
 </body>
 
 </html>

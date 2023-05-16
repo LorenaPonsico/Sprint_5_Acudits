@@ -137,7 +137,7 @@ function scoreJoke(score) {
         score: score,
         date: new Date().toISOString(),
     });
-    console.log(reportJokes);
+    // console.log(reportJokes);
 }
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {

@@ -92,8 +92,7 @@ function scoreJoke(score: number) {
         score: score,
         date: new Date().toISOString(),
     });
-
-    console.log(reportJokes);
+    // console.log(reportJokes);
 }
 
 if (navigator.geolocation) {
@@ -118,3 +117,6 @@ if (navigator.geolocation) {
             });
     });
 }
+
+
+
