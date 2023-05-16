@@ -35,20 +35,42 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var API_URL = "https://icanhazdadjoke.com/";
-var responseApi;
+var API_URL2 = "https://api.chucknorris.io/jokes/random";
+var header = { headers: { Accept: "application/json" } };
+var responseApi1;
+var responseApiChuckNorris;
 function newJoke() {
-    getJoke();
+    return __awaiter(this, void 0, void 0, function () {
+        var responseApi1, responseApiChuckNorris;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, getJoke()];
+                case 1:
+                    responseApi1 = _a.sent();
+                    return [4 /*yield*/, getJokeChuckNorris()];
+                case 2:
+                    responseApiChuckNorris = _a.sent();
+                    randomJokes(responseApi1, responseApiChuckNorris);
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function randomJokes(responseApi1, responseApiChuckNorris) {
+    var number = Math.floor(Math.random() * 12);
+    if (number <= 5) {
+        showJoke(responseApi1, null);
+    }
+    else {
+        showJoke(null, responseApiChuckNorris);
+    }
 }
 function getJoke() {
     return __awaiter(this, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, fetch(API_URL, {
-                        headers: {
-                            Accept: 'application/json',
-                        },
-                    })];
+                case 0: return [4 /*yield*/, fetch(API_URL, header)];
                 case 1:
                     response = _a.sent();
                     if (!response.ok) { // si la respuesta es fallida lanza un nuevo error con el estado
@@ -56,18 +78,42 @@ function getJoke() {
                     }
                     return [4 /*yield*/, response.json()];
                 case 2:
-                    responseApi = _a.sent();
-                    showJoke(); //llamada a la funcion que muestra el chiste
-                    return [2 /*return*/, responseApi];
+                    responseApi1 = _a.sent();
+                    return [2 /*return*/, responseApi1];
             }
         });
     });
 }
-function showJoke() {
-    if (responseApi) {
+function getJokeChuckNorris() {
+    return __awaiter(this, void 0, void 0, function () {
+        var response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fetch(API_URL2, header)];
+                case 1:
+                    response = _a.sent();
+                    if (!response.ok) { // si la respuesta es fallida lanza un nuevo error con el estado
+                        throw new Error("HTTP error! status: ".concat(response.status));
+                    }
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    responseApiChuckNorris = _a.sent();
+                    return [2 /*return*/, responseApiChuckNorris];
+            }
+        });
+    });
+}
+function showJoke(responseApi1, responseApiChuckNorris) {
+    if (responseApi1) {
         var showJokeElement = document.getElementById("showJoke");
         if (showJokeElement) {
-            showJokeElement.innerHTML = responseApi.joke;
+            showJokeElement.innerHTML = responseApi1.joke;
+        }
+    }
+    if (responseApiChuckNorris) {
+        var showJokeElement = document.getElementById("showJoke");
+        if (showJokeElement) {
+            showJokeElement.innerHTML = responseApiChuckNorris.value;
         }
     }
 }
@@ -77,9 +123,9 @@ function scoreJoke(id) {
     var scoreJoke = id;
     var date = new Date();
     var dateToString = date.toISOString();
-    var existJoke = reportJokes.find(function (x) { return x.joke === responseApi.joke; });
+    var existJoke = reportJokes.find(function (x) { return x.joke === responseApi1.joke; });
     if (!existJoke) {
-        objectJoke = { joke: responseApi.joke, score: scoreJoke, date: dateToString };
+        objectJoke = { joke: responseApi1.joke, score: scoreJoke, date: dateToString };
         reportJokes.push(objectJoke);
     }
     if (existJoke) {
